@@ -1,0 +1,29 @@
+# Power profile configuration
+
+{ config, pkgs, inputs, ... }:
+
+{
+  imports = [
+    inputs.auto-cpufreq.nixosModules.default
+  ];
+
+  # auto-cpufreq profiles
+  programs.auto-cpufreq.enable = true;
+  programs.auto-cpufreq.settings = {
+    charger = {
+      governor = "performance";
+      turbo = "auto";
+    };
+
+    battery = {
+      governor = "powersave";
+      turbo = "auto";
+    };
+  };
+
+  # power-profiles-daemon conflicts with auto-cpufreq
+  services.power-profiles-daemon.enable = false;
+
+  # tlp should not be active at the same time as auto-cpufreq
+  services.tlp.enable = false;
+}
