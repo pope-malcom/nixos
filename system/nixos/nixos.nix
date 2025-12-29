@@ -3,12 +3,13 @@
 { config, pkgs, ... }:
 
 {
+  # Allow the nixos group to edit anything in /etc/nixos folder
   systemd.tmpfiles.settings = {
-    "10-mypackage" = {
+    "set-nixos-group" = {
       "/etc/nixos" = {
-        d = {
+        Z = {
           group = "nixos";
-          mode = "0775";
+          mode = "~0775";
           user = "root";
         };
       };
