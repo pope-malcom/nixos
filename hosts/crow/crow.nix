@@ -17,6 +17,9 @@
     efi.canTouchEfiVariables = true;
   };
 
+  # Automatic login with LUKS password
+  services.displayManager.autoLogin.user = "pomal";
+
   # Plymouth: boot logo customisation
   boot.plymouth.enable = true;
 
@@ -39,5 +42,4 @@
   # Enable bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;   
-
 }
