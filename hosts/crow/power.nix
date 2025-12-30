@@ -7,6 +7,11 @@
     inputs.auto-cpufreq.nixosModules.default
   ];
 
+  # Automatically hibernate after period of inactivity
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30m
+  '';
+
   # auto-cpufreq profiles
   programs.auto-cpufreq.enable = true;
   programs.auto-cpufreq.settings = {
