@@ -7,6 +7,13 @@
     inputs.auto-cpufreq.nixosModules.default
   ];
 
+  # Set lid close functions
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend-then-hibernate";
+    HandleLidSwitchExternalPower = "lock";
+    HandleLidSwitchDocked = "ignore";
+  };
+
   # Automatically hibernate after period of inactivity
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=30m
