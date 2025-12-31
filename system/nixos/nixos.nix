@@ -33,7 +33,7 @@
   # Runs before auto upgrade service, updates flake.lock
   systemd.services."nixos-flake-update" = {
     description = "flake.lock update";
-    documentation = [ "man:nix3-flake-lock" ];
+    documentation = [ "man:nix3-flake-update" ];
     path = [ pkgs.nix pkgs.git ];
     script = ''
       set -eu
