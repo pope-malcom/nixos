@@ -20,6 +20,9 @@
   # Automatic login with LUKS password
   services.displayManager.autoLogin.user = "pomal";
 
+  # Enable fingerprint scanner
+  services.fprintd.enable = true;
+
   # Plymouth: boot logo customisation
   boot.plymouth.enable = true;
 
