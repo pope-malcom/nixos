@@ -34,9 +34,11 @@
   systemd.services."nixos-flake-update" = {
     description = "flake.lock update";
     documentation = [ "man:nix3-flake-lock" ];
+    path = [ pkgs.nix pkgs.git ];
     script = ''
       set -eu
-      ${pkgs.nix}/bin/nix flake update --flake /etc/nixos/ --commit-lock-file
+      cd /etc/nixos
+      nix flake update --commit-lock-file
     '';
     serviceConfig = {
       Type = "oneshot";
