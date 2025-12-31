@@ -38,7 +38,10 @@
     script = ''
       set -eu
       cd /etc/nixos
+      old_uname=$(git config user.name)
+      git config user.name "nixos-flake-update service"
       nix flake update --commit-lock-file
+      git config user.name $old_uname
     '';
     serviceConfig = {
       Type = "oneshot";
