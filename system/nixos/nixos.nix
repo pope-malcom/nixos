@@ -36,7 +36,7 @@
     documentation = [ "man:nix3-flake-lock" ];
     script = ''
       set -eu
-      ${pkgs.nix}/bin/nix flake update --flake /etc/nixos/ 
+      ${pkgs.nix}/bin/nix flake update --flake /etc/nixos/ --commit-lock-file
     '';
     serviceConfig = {
       Type = "oneshot";
