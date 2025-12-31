@@ -8,6 +8,5 @@
   # TODO: implement host selection
   imports = [
     ./crow
-    ./global.nix
   ];
 }
