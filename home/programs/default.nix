@@ -4,7 +4,7 @@
 
 {
   imports = [
-    ./editors.nix
+    ./nixvim.nix
     ./utils.nix
   ];
 }
