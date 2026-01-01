@@ -4,6 +4,6 @@
 
 {
   imports = [
-    ./gnome
+    ./gnome.nix
   ];
 }
