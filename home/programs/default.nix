@@ -4,6 +4,7 @@
 
 {
   imports = [
+    ./editors.nix
     ./utils.nix
   ];
 }
