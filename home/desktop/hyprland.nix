@@ -27,6 +27,8 @@ in
 
         bind = [
           "SUPER, T, exec, ${config.programs.alacritty.package}/bin/alacritty"
+          "SUPER, N, exec, ${config.programs.firefox.package}/bin/firefox"
+          "SUPER, Q, killactive"
         ];
       };
     };
