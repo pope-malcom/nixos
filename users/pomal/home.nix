@@ -7,6 +7,7 @@
     ../../home/browsers/firefox.nix
     ../../home/programs
     ../../home/console
+    ../../home/desktop
 
      # programs unique to this user
     ./programs
