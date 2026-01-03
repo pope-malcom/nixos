@@ -13,6 +13,8 @@ in
   };
   
   config = mkIf config.custom.hyprlandConfig.enable {
+    services.mako.enable = true;
+
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = false;
