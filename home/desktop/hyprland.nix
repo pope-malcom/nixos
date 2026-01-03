@@ -25,7 +25,12 @@ in
           follow_mouse = 1;
           touchpad.natural_scroll = "yes";
         };
+        
         xwayland.force_zero_scaling = true;
+        monitor = [
+          "eDP-1, 2880x1920@120, 0x0, 2"
+          ", preferred, auto, 1"
+        ];
 
         bind = [
           "SUPER, T, exec, ${config.programs.alacritty.package}/bin/alacritty"
