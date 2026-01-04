@@ -17,6 +17,12 @@
       gca = "git commit -A";
     };
 
+    # Keybinds for deleting word/lines match forward word/line 
+    initContent = ''
+      bindkey "^w" backward-kill-line
+      bindkey "\ew" backward-kill-word
+    '';
+
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -24,19 +30,21 @@
       ];
       theme = "robbyrussell";
     };
- 
-    history.size = 10000;
-    history.share = false;
-    history.ignoreAllDups = true;
-    history.ignoreSpace = true;
-    history.path = "$HOME/.zsh_history";
-    history.ignorePatterns = [
-      "rm *" 
-      "pkill *" 
-      "cp *" 
-      "git *"
-      "ga *" "gc *" "gs *" "gp *" "gca *" 
-      "z *"
-    ];
+
+    history = {
+      size = 10000;
+      share = false;
+      ignoreAllDups = true;
+      ignoreSpace = true;
+      path = "$HOME/.zsh_history";
+      ignorePatterns = [
+        "rm *" 
+        "pkill *" 
+        "cp *" 
+        "git *"
+        "ga *" "gc *" "gs *" "gp *" "gca *" 
+        "z *"
+      ];
+    };
   };
 }
