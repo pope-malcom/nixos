@@ -48,7 +48,9 @@
       User = "root";
     };
     wantedBy = [ "nixos-upgrade.service" ];
+    wants = [ "network-online.target" ];
     before = [ "nixos-upgrade.service" ];
+    after = [ "network-online.target" ];
   };
 
   # Enable firmware update commands
