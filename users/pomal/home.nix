@@ -6,7 +6,7 @@
   imports = [
     ../../home/browsers/firefox.nix
     ../../home/programs
-    ../../home/console
+    ../../home/shell
     ../../home/desktop
 
      # programs unique to this user
