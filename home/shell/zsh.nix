@@ -8,15 +8,6 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = {
-      # Git aliases
-      ga = "git add";
-      gc = "git commit";
-      gs = "git status";
-      gp = "git push";
-      gca = "git commit -A";
-    };
-
     # Keybinds for deleting word/lines match forward word/line 
     initContent = ''
       bindkey "^w" backward-kill-line
@@ -42,7 +33,7 @@
         "pkill *" 
         "cp *" 
         "git *"
-        "ga *" "gc *" "gs *" "gp *" "gca *" 
+        "ga *" "gs *" "gp *" "gc *" "gca *" "gcam *" 
         "z *"
       ];
     };

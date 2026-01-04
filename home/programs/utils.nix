@@ -19,14 +19,6 @@
     };
   };
 
-  # Add aliases to auto use bat
-  programs.zsh.shellAliases = {
-    cat = "bat --decorations=never --paging=never";
-    less = "bat --pager=less";
-    man = "batman";
-    diff = "batdiff --paging=never --decorations=never";
-  };
-
   # delta: bat style pager for git, diff, grep and blame
   programs.delta = {
     enable = true;
@@ -38,7 +30,7 @@
     };
   };
   
-  # ripgrep
+  # Ripgrep (https://github.com/BurntSushi/ripgrep)
   programs.ripgrep = {
     enable = true;
   };

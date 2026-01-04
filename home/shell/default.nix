@@ -5,6 +5,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./aliases.nix
     ./starship.nix
     ./zsh.nix 
   ];
