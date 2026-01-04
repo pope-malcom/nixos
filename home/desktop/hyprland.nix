@@ -1,5 +1,5 @@
 # User hyprland configuration
-{ osConfig, config, lib, ... }:
+{ config, lib, osConfig, ... }:
 
 let
   inherit (lib)
@@ -8,11 +8,11 @@ let
   ;
 in
 {
-  options.custom.hyprlandConfig = {
-    enable = mkEnableOption "hyprland Config"; 
+  options.home.desktop.hyprland = {
+    enable = mkEnableOption "hyprland"; 
   };
   
-  config = mkIf config.custom.hyprlandConfig.enable {
+  config = mkIf config.home.desktop.hyprland.enable {
     services.mako.enable = true;
 
     wayland.windowManager.hyprland = {
@@ -25,7 +25,9 @@ in
           follow_mouse = 1;
           touchpad.natural_scroll = "yes";
         };
-        
+
+        exec-once = "waybar";
+
         xwayland.force_zero_scaling = true;
         monitor = [
           "eDP-1, 2880x1920@120, 0x0, 2"

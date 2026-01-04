@@ -1,12 +1,14 @@
 # Load user desktop configs
-{ osConfig, config, pkgs, ... }:
+{ osConfig, ... }:
 
 {
   imports = [
     ./hyprland.nix
+    ./waybar.nix
   ];
 
-  custom = {
-    hyprlandConfig.enable = osConfig.programs.hyprland.enable;
+  home.desktop = {
+    hyprland.enable = osConfig.programs.hyprland.enable;
+    waybar.enable = osConfig.programs.hyprland.enable;
   };
 }
