@@ -4,6 +4,7 @@
 
 {
   imports = [
+    ./locale.nix
     ./nixos.nix
     ./stateVersion.nix
   ];

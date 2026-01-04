@@ -7,9 +7,8 @@
     ./desktop
     ./hardware
     ./kernel
-    ./locale
+    ./modules
     ./nixos
-    ./programs
     ./shell
   ];
 }
