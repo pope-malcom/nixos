@@ -16,6 +16,7 @@
     gc = "git commit";
     gca = "git commit -a";
     gcam = "git commit -am";
+    gcm = "git commit -m";
     gs = "git status";
     gp = "git push";
   };
