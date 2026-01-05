@@ -9,6 +9,7 @@
     profiles = {
       pomal = {
         name = "Pope Malcom";
+        search.force = true; # Replace config with one defined here
         search.engines = {
           nix-packages = {
             name = "Nix Packages";

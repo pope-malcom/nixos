@@ -18,7 +18,6 @@
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs.flake-inputs = inputs;
-      home-manager.backupFileExtension = "old";
       home-manager.users = {
         pomal = import ./pomal/home.nix;
       };
