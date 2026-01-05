@@ -53,6 +53,11 @@
     after = [ "network-online.target" ];
   };
 
+  # Install nerdfont symbols
+  fonts.packages = with pkgs; [
+    nerd-fonts.symbols-only
+  ];
+
   # Enable firmware update commands
   services.fwupd.enable = true;
 
