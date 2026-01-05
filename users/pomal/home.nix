@@ -4,7 +4,7 @@
 
 {
   imports = [
-    ../../home/browsers/firefox.nix
+    ../../home/browsers/librewolf.nix
     ../../home/programs
     ../../home/shell
     ../../home/desktop
