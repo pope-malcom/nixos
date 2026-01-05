@@ -32,7 +32,7 @@
         "pkill *" 
         "cp *" 
         "git *"
-        "ga *" "gs *" "gp *" "gc *" "gca *" "gcam *" "gcm *" 
+        "ga *" "gs *" "gp *" "gc *" "gca *" "gcam *" "gcm *" "gd *" 
         "z *"
       ];
     };

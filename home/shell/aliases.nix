@@ -19,6 +19,7 @@
     gcm = "git commit -m";
     gs = "git status";
     gp = "git push";
+    gd = "git diff HEAD";
   };
 
 }
