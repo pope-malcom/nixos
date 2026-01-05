@@ -11,20 +11,35 @@
   # Hostname
   networking.hostName = "crow";
 
-  # Bootloader
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    
+      # Hide OS choice. Pressing any key should make it reappear
+      timeout = 0;
+    };
 
+    # Plymouth: boot logo customisation
+    plymouth.enable = true;
+
+    # Silent boot
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
+  };
+  
   # Automatic login with LUKS password
   services.displayManager.autoLogin.user = "pomal";
 
   # Enable fingerprint scanner
   services.fprintd.enable = true;
-
-  # Plymouth: boot logo customisation
-  boot.plymouth.enable = true;
 
   # Touchpad (likely already enabled in desktop manager)
   services.libinput.enable = true;
@@ -37,7 +52,7 @@
   console.useXkbConfig = true;
 
   # Should reduce screen flickering until a proper patch is deployed
-  boot.kernelParams = ["amdgpu.sg_display=0"];
+  #boot.kernelParams = ["amdgpu.sg_display=0"];
 
   # Disable sensors (maybe saving power)
   hardware.sensor.iio.enable = false;
