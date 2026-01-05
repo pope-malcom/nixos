@@ -23,11 +23,6 @@
       register = "unnamedplus";
     };
 
-    colorschemes.catppuccin = {
-      enable = true;
-      settings.flavour = "mocha";
-    };
-
     autoCmd = [
       {
         desc = ''Restore cursor position upon file reopen'';

@@ -13,7 +13,13 @@
     # NixOS hardware support for Framework 13 AMD AI 300 series
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    # Auto-cpufreq: throttle CPU for power purposes
+    # Stylix themeing framework
+    stylix = {
+      url = "github:nix-community/stylix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Auto-cpufreq: throttle CPU for power saving
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +36,7 @@
     nixpkgs, 
     home-manager, 
     nixos-hardware, 
+    stylix,
     auto-cpufreq,
     nix-flatpak,
     nixvim,

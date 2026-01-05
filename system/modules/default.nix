@@ -4,6 +4,7 @@
 
 {
   imports = [
+    ./stylix.nix
     ./utils.nix
   ];
 }

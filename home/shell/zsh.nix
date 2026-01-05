@@ -19,7 +19,6 @@
       plugins = [
         "z"     # Adds z command
       ];
-      theme = "robbyrussell";
     };
 
     history = {
