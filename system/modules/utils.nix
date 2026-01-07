@@ -22,5 +22,7 @@
 
   environment.systemPackages = with pkgs; [
     # System packages to install
+    pavucontrol
+    teams-for-linux
   ];
 }

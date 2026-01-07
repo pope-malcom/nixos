@@ -14,5 +14,8 @@ in
 
   config = mkIf config.home.desktop.waybar.enable {
     programs.waybar.enable = true;
+
+    # TODO Find a better place for these
+    services.blueman-applet.enable = true;
   };
 }
