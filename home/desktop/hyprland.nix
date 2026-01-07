@@ -38,7 +38,18 @@ in
           "SUPER, T, exec, ${config.programs.alacritty.package}/bin/alacritty"
           "SUPER, N, exec, ${config.programs.librewolf.package}/bin/librewolf"
           "SUPER, Q, killactive"
-        ];
+        ]
+        ++ (
+          # Workspace movement
+          builtins.concatLists (builtins.genList (i:
+            let ws = i + 1;
+            in [
+              "SUPER, code:1${toString i}, workspace, ${toString ws}"
+              "SUPER + SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+            ]
+          )
+          9)
+        );
       };
     };
   };
