@@ -13,7 +13,23 @@ in
   };
   
   config = mkIf config.home.desktop.hyprland.enable {
+    # TODO Find somewhere better for these
     services.mako.enable = true;
+    programs.tofi = {
+      enable = true;
+      settings = {
+        #background-color = "#000000";
+        border-width = 0;
+        #font = "monospace";
+        height = "100%";
+        num-results = 5;
+        outline-width = 0;
+        padding-left = "35%";
+        padding-top = "35%";
+        result-spacing = 25;
+        width = "100%";
+      };
+    };
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -37,6 +53,7 @@ in
         bind = [
           "SUPER, T, exec, ${config.programs.alacritty.package}/bin/alacritty"
           "SUPER, N, exec, ${config.programs.librewolf.package}/bin/librewolf"
+          "SUPER, L, exec, ${config.programs.tofi.package}/bin/tofi-drun | xargs hyprctl dispatch exec"
           "SUPER, Q, killactive"
         ]
         ++ (
