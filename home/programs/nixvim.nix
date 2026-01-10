@@ -6,20 +6,22 @@
     flake-inputs.nixvim.homeModules.nixvim
   ];
 
+  # https://nix-community.github.io/nixvim/25.11/
   programs.nixvim = {
     enable = true;
-    
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-    
-    withNodeJs = false;
-    withPerl = false;
-    withPython3 = false;
-    withRuby = false;
 
-    clipboard = {
-      providers.wl-copy.enable = true;
+  
+  viAlias = true;
+  vimAlias = true;
+  vimdiffAlias = true;
+  
+  withNodeJs = false;
+  withPerl = false;
+  withPython3 = false;
+  withRuby = false;
+
+  clipboard = {
+    providers.wl-copy.enable = true;
       register = "unnamedplus";
     };
 
@@ -33,26 +35,84 @@
     ];
 
     opts = {
+      # Line numbers
+      number = true;
+
       # Indents
       shiftwidth = 2;
       smarttab = true;
       expandtab = true;
       tabstop = 8;
       softtabstop = 0;
-      
-      # Wrap cursor movements to next/previous line
-      whichwrap = "<,>,h,l,[,]";
 
-      # Line numbers
-      number = true;
+      # Wrapping
+      textwidth = 0;
+      wrapmargin = 0;
+      wrap = true;
+      linebreak = true; # break by word instead of character
+
+      # Wrap cursor movements to next/previous line
+      whichwrap = "<,>,[,],b,s";
 
       # Start scrolling when cursor is X lines from bottom
       scrolloff = 5;
     };
+
+    extraConfigLua = ''
+
+      -- Move to line start. If already there, move <dir>
+      function move_dir_start_line(dir)
+        col = vim.api.nvim_win_get_cursor(0)[2]
+        vim.cmd("norm! ^")
+        if (col == vim.api.nvim_win_get_cursor(0)[2]) then
+          vim.cmd("norm! " .. dir .."^")
+        end
+      end
+
+      --CUSTOM COMMANDS
+      
+      vim.api.nvim_create_user_command("MoveUpStartLine",
+        function()
+          move_dir_start_line("k")
+        end, {});
+
+      vim.api.nvim_create_user_command("MoveDownStartLine",
+        function()
+          move_dir_start_line("j")
+        end, {});
+    ''; 
+
+    keymaps = [
+      # In normal mode, <Up> moves display lines
+      {
+        key = "<Up>";
+        action = "g<Up>";
+        mode = "n";
+      }
+
+      # In normal mode, <Down> moves display lines2
+      {
+        key = "<Down>";
+        action = "g<Down>";
+        mode = "n";
+      }
+      
+      {
+        key = "<C-UP>";
+        action = "<cmd>:MoveUpStartLine<CR>";
+        mode = "n";
+      }
+      
+      {
+        key = "<C-DOWN>";
+        action = "<cmd>:MoveDownStartLine<CR>";
+        mode = "n";
+      }
+    ];
     
     plugins = {
-      treesitter = {
-        enable = true;
+        treesitter = {
+          enable = true;
         settings = {
           highlight.enable = true;
           indent.enable = true;
