@@ -83,30 +83,31 @@
     ''; 
 
     keymaps = [
-      # In normal mode, <Up> moves display lines
+      # In normal mode, <Up>/<Down> moves display lines
       {
         key = "<Up>";
         action = "g<Up>";
         mode = "n";
       }
 
-      # In normal mode, <Down> moves display lines2
       {
         key = "<Down>";
         action = "g<Down>";
         mode = "n";
       }
-      
+
+
+      # CTRL + <UP>/<DOWN> moves to line start and then moves
       {
         key = "<C-UP>";
         action = "<cmd>:MoveUpStartLine<CR>";
-        mode = "n";
+        mode = [ "n" "i" ];
       }
       
       {
         key = "<C-DOWN>";
         action = "<cmd>:MoveDownStartLine<CR>";
-        mode = "n";
+        mode = [ "n" "i" ];
       }
     ];
     
