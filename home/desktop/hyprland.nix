@@ -12,22 +12,26 @@ in
     enable = mkEnableOption "hyprland"; 
   };
   
+
   config = mkIf config.home.desktop.hyprland.enable {
     # TODO Find somewhere better for these
     services.mako.enable = true;
+    
+    stylix.targets.tofi.enable = false;
     programs.tofi = {
       enable = true;
       settings = {
-        #background-color = "#000000";
-        border-width = 0;
-        #font = "monospace";
+        width = "100%";
         height = "100%";
-        num-results = 5;
+        border-width = 0;
         outline-width = 0;
         padding-left = "35%";
         padding-top = "35%";
         result-spacing = 25;
-        width = "100%";
+        num-results = 5;
+        font = "monospace";
+        background-color = "#000A";
+        selection-color = "#F92672";
       };
     };
 
