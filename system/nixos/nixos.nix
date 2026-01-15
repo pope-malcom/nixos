@@ -19,7 +19,7 @@
   # Enable automatic updates (respective of flake)
   system.autoUpgrade = {
     enable = true;
-    flake = "/etc/nixos/"; # User version updated by nixos-flake-update
+    flake = "/etc/nixos/"; # Use the version updated by nixos-flake-update
     flags = [
       "--print-build-logs"
     ];
@@ -31,6 +31,7 @@
 
   # nix flake update service
   # Runs before auto upgrade service, updates flake.lock
+  # wants/before targets copied from nixos-upgrade.service
   systemd.services."nixos-flake-update" = {
     description = "flake.lock update";
     documentation = [ "man:nix3-flake-update" ];
@@ -48,9 +49,10 @@
       User = "root";
     };
     wantedBy = [ "nixos-upgrade.service" ];
-    wants = [ "network-online.target" ];
     before = [ "nixos-upgrade.service" ];
-    after = [ "network-online.target" ];
+    requires = [ "system.slice" "sysinit.target" ];
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" "basic.target" "systemd-journald.socket" "sysinit.target" "system.slice" ];
   };
 
   # Install nerdfont symbols
