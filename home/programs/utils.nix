@@ -37,9 +37,18 @@
 
   # Auto pipe ripgrep output to delta
   programs.zsh.initContent = ''
-    rg() { ${config.programs.ripgrep.package}/bin/rg --json -C 2 $@ | delta }
-    
+    rg() { ${config.programs.ripgrep.package}/bin/rg --json -C 2 $@ | delta } 
   '';
+
+  # Custom C-UP keybindings for less, probably only works with alacritty
+  programs.less = {
+    enable = true;
+    config = ''
+      # Keybindings
+      \e[1;5A   back-scroll
+      \e[1;5B   forw-scroll
+    '';
+  };
 
   home.packages = with pkgs; [
     
