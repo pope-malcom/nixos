@@ -47,6 +47,14 @@
     serviceConfig = {
       Type = "oneshot";
       User = "root";
+      
+      # Make the service restart up to 5 times
+      Restart = "on-failure";
+      RestartSec = "10s";
+      RestartSteps = "5";
+      RestartMaxDelaySec = "5";
+      StartLimitBurst = "5";
+      StartLimitIntervalSec = "infinity";
     };
     wantedBy = [ "nixos-upgrade.service" ];
     before = [ "nixos-upgrade.service" ];
