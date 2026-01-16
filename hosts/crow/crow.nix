@@ -62,9 +62,6 @@
   };
   console.useXkbConfig = true;
 
-  # Should reduce screen flickering until a proper patch is deployed
-  #boot.kernelParams = ["amdgpu.sg_display=0"];
-
   # Disable sensors (maybe saving power)
   hardware.sensor.iio.enable = false;
 
