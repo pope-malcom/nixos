@@ -37,7 +37,8 @@
 
   # Auto pipe ripgrep output to delta
   programs.zsh.initContent = ''
-    rg() { rg $@ --json | delta }
+    rg() { ${config.programs.ripgrep.package}/bin/rg --json -C 2 $@ | delta }
+    
   '';
 
   home.packages = with pkgs; [
