@@ -15,8 +15,17 @@ in
 
   config = mkIf config.home.desktop.hyprland.enable {
     # TODO Find somewhere better for these
-    services.mako.enable = true;
     
+    #https://github.com/danyspin97/wpaperd
+    services.wpaperd = {
+      enable = true;
+      settings = {
+        any = {
+          path = ./wallpaper.jpg;
+        };
+      };
+    };
+
     stylix.targets.tofi.enable = false;
     programs.tofi = {
       enable = true;
@@ -46,7 +55,10 @@ in
           touchpad.natural_scroll = "yes";
         };
 
-        exec-once = "waybar";
+        exec-once = [
+          "waybar"
+          "${config.services.wpaperd.package}/bin/wpaperd -d"
+        ];
 
         xwayland.force_zero_scaling = true;
         monitor = [

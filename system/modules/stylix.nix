@@ -9,7 +9,6 @@
   stylix = {
     enable = true;
     
-    image = ../../wallpaper.jpg;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/penumbra-dark-contrast-plus-plus.yaml";
 
     # https://github.com/simtrami/posy-improved-cursor-linux

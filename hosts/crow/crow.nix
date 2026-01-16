@@ -37,8 +37,17 @@
     ];
   };
   
-  # Automatic login with LUKS password
-  services.displayManager.autoLogin.user = "pomal";
+  # Minimal greetd setup. Automatically logs into hyprland as pomal
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      initial_session = {
+        command = "${pkgs.hyprland}/bin/hyprland";
+        user = "pomal";
+      };
+      default_session = initial_session;
+    };
+  };
 
   # Enable fingerprint scanner
   services.fprintd.enable = true;
