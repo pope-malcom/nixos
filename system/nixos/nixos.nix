@@ -31,7 +31,6 @@
 
   # nix flake update service
   # Runs before auto upgrade service, updates flake.lock
-  # wants/before targets copied from nixos-upgrade.service
   systemd.services."nixos-flake-update" = {
     description = "flake.lock update";
     documentation = [ "man:nix3-flake-update" ];
@@ -48,14 +47,20 @@
       Type = "oneshot";
       User = "root";
       
-      # Make the service restart up to 5 times
+      # Make the service auto restart, 
       Restart = "on-failure";
       RestartSec = "10s";
       RestartSteps = "5";
-      RestartMaxDelaySec = "5";
-      StartLimitBurst = "5";
-      StartLimitIntervalSec = "infinity";
+      RestartMaxDelaySec = "1h";
     };
+
+    unitConfig = {
+      # Only restart 5 times
+      startLimitBurst = "5";
+      startLimitIntervalSec = "infinity";
+    };
+
+    # Targets copied from nixos-upgrade.service
     wantedBy = [ "nixos-upgrade.service" ];
     before = [ "nixos-upgrade.service" ];
     requires = [ "system.slice" "sysinit.target" ];
