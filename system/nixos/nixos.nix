@@ -56,8 +56,8 @@
 
     unitConfig = {
       # Only restart 5 times
-      startLimitBurst = "5";
-      startLimitIntervalSec = "infinity";
+      StartLimitBurst = "5";
+      StartLimitIntervalSec = "infinity";
     };
 
     # Targets copied from nixos-upgrade.service
