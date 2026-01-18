@@ -3,9 +3,24 @@
 
 {
   # fzf: Fuzzy finder
+  # https://github.com/junegunn/fzf
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  # eza: ls replacement
+  # https://github.com/eza-community/eza
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+    git = true;
+    icons = "auto";
+    extraOptions = [
+      "--header"
+      "--time-style=long-iso"
+      "--hyperlink"
+    ];
   };
 
   programs.zsh = {
@@ -23,7 +38,6 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
-        "z"     # Adds z command
       ];
     };
 
