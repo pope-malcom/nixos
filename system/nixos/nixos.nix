@@ -34,14 +34,23 @@
   systemd.services."nixos-flake-update" = {
     description = "flake.lock update";
     documentation = [ "man:nix3-flake-update" ];
-    path = [ pkgs.nix pkgs.git ];
+    path = [ pkgs.nix pkgs.git pkgs.iputils pkgs.util-linux];
     script = ''
       set -eu
+      # Check for internet access
+      ping -q -c1 github.com &> /dev/null ||  \
+        ( logger -p 4 -t "nixos-flake-update" \
+          "Failed to reach github.com"; exit 1; 
+        )
+
+      # Update flake
       cd /etc/nixos
       old_uname=$(git config user.name)
       git config user.name "nixos-flake-update service"
       nix flake update --commit-lock-file
       git config user.name $old_uname
+
+      exit 0
     '';
     serviceConfig = {
       Type = "oneshot";
