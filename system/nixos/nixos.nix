@@ -70,11 +70,10 @@
     };
 
     # Targets copied from nixos-upgrade.service
-    wantedBy = [ "nixos-upgrade.service" ];
+    requiredBy = [ "nixos-upgrade.service" ];
     before = [ "nixos-upgrade.service" ];
-    requires = [ "system.slice" "sysinit.target" ];
-    wants = [ "network-online.target" ];
-    after = [ "network-online.target" "basic.target" "systemd-journald.socket" "sysinit.target" "system.slice" ];
+    wants = [ "default.target" ];
+    after = [ "default.target" ];
   };
 
   # Install nerdfont symbols
