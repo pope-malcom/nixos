@@ -52,7 +52,7 @@
         "pkill *" 
         "cp *" 
         "git *"
-        "ga *" "gs *" "gp *" "gc *" "gca *" "gcam *" "gcm *" "gd *" 
+        "ga *" "gs *" "gp *" "gc *" "gca *" "gcam *" "gcm *" "gd *" "gl *" 
         "z *"
       ];
     };

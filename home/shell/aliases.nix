@@ -20,6 +20,7 @@
     gs = "git status";
     gp = "git push";
     gd = "git diff HEAD";
+    gl = "git log";
   };
 
 }
