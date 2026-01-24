@@ -1,6 +1,6 @@
 # NixOS configuration
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   # Allow the nixos group to edit anything in /etc/nixos folder
@@ -14,6 +14,25 @@
         };
       };
     };
+  };
+
+  # Check if the network is connected
+  systemd.services."NetworkManager-check-connection" = {
+    description = "NetworkManager connection check";
+    path = [ pkgs.networkmanager ];
+    script = ''
+      nm-online --timeout=30 -q 
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+    requiredBy = [ "network-connected.target" ];
+    before = [ "network-connected.target" ];
+  };
+
+  systemd.targets."network-connected" = {
+    description = "Network connection established";
   };
 
   # Enable automatic updates (respective of flake)
@@ -37,18 +56,14 @@
     path = [ pkgs.nix pkgs.git pkgs.iputils pkgs.util-linux];
     script = ''
       set -eu
-      # Check for internet access
-      ping -q -c1 github.com &> /dev/null ||  \
-        ( logger -p 4 -t "nixos-flake-update" \
-          "Failed to reach github.com"; exit 1; 
-        )
-
       # Update flake
       cd /etc/nixos
       old_uname=$(git config user.name)
       git config user.name "nixos-flake-update service"
       nix flake update --commit-lock-file
       git config user.name $old_uname
+
+      echo "Commited flake.lock to git"
 
       exit 0
     '';
@@ -72,8 +87,8 @@
     # Targets copied from nixos-upgrade.service
     requiredBy = [ "nixos-upgrade.service" ];
     before = [ "nixos-upgrade.service" ];
-    wants = [ "default.target" ];
-    after = [ "default.target" ];
+    requires = [ "network-connected.target" ];
+    after = [ "network-connected.target" ];
   };
 
   # Install nerdfont symbols
@@ -101,7 +116,7 @@
     automatic = true;
     dates = "weekly";
     persistent = true;
-    options = "--delete-older-than 30d"; #nix-collect-garbage -d can be run to collect garbage immediately
+    options = "--delete-older-than 14d"; #nix-collect-garbage -d can be run to collect garbage immediately
     
   };
 
