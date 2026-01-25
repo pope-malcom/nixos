@@ -29,17 +29,17 @@
     };
   };
 
-  # Enable automatic updates (respective of flake)
-  system.autoUpgrade = {
-    enable = true;
-    flake = "/etc/nixos/"; # Use the version updated by nixos-flake-update
-    flags = [
-      "--print-build-logs"
-    ];
-    dates = "daily";
-    randomizedDelaySec = "45min";
-    upgrade = false;
-    persistent = true;
+  # Timer to run nixos-flake-update at scheduled times
+  systemd.timers."nixos-flake-update" = {
+    description = "nixos-flake-update timer";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = "true";
+      RandomizedDelaySec = "45min";
+      FixedRandomDelay = "false";
+      Unit = "nixos-flake-update.service";
+    };
   };
 
   # nix flake update service
@@ -47,7 +47,7 @@
   systemd.services."nixos-flake-update" = {
     description = "flake.lock update";
     documentation = [ "man:nix3-flake-update" ];
-    path = [ pkgs.nix pkgs.git pkgs.iputils pkgs.util-linux];
+    path = [ pkgs.nix pkgs.git pkgs.nixos-rebuild ];
     script = ''
       set -eu
       # Update flake
@@ -56,15 +56,17 @@
       git config user.name "nixos-flake-update service"
       nix flake update --commit-lock-file
       git config user.name $old_uname
-
       echo "Commited flake.lock to git"
+
+      nixos-rebuild switch --flake /etc/nixos 
+      echo "System updated"
 
       exit 0
     '';
     serviceConfig = {
       Type = "oneshot";
       User = "root";
-      
+
       # Make the service auto restart, 
       Restart = "on-failure";
       RestartSec = "10s";
@@ -79,8 +81,6 @@
     };
 
     # Targets copied from nixos-upgrade.service
-    requiredBy = [ "nixos-upgrade.service" ];
-    before = [ "nixos-upgrade.service" ];
     requires = [ "network-connection.service" ];
     after = [ "network-connection.service" ];
   };
