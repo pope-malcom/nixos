@@ -17,8 +17,8 @@
   };
 
   # Check if the network is connected
-  systemd.services."NetworkManager-check-connection" = {
-    description = "NetworkManager connection check";
+  systemd.services."network-connection" = {
+    description = "network connection check";
     path = [ pkgs.networkmanager ];
     script = ''
       nm-online --timeout=30 -q 
@@ -27,12 +27,6 @@
       Type = "oneshot";
       User = "root";
     };
-    requiredBy = [ "network-connected.target" ];
-    before = [ "network-connected.target" ];
-  };
-
-  systemd.targets."network-connected" = {
-    description = "Network connection established";
   };
 
   # Enable automatic updates (respective of flake)
@@ -87,8 +81,8 @@
     # Targets copied from nixos-upgrade.service
     requiredBy = [ "nixos-upgrade.service" ];
     before = [ "nixos-upgrade.service" ];
-    requires = [ "network-connected.target" ];
-    after = [ "network-connected.target" ];
+    requires = [ "network-connection.service" ];
+    after = [ "network-connection.service" ];
   };
 
   # Install nerdfont symbols
