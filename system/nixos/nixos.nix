@@ -58,7 +58,7 @@
       git config user.name $old_uname
       echo "Commited flake.lock to git"
 
-      nixos-rebuild switch --flake /etc/nixos 
+      nixos-rebuild boot --flake /etc nixos --max-jobs=1
       echo "System updated"
 
       exit 0
@@ -80,7 +80,7 @@
       StartLimitIntervalSec = "infinity";
     };
 
-    # Targets copied from nixos-upgrade.service
+    # Needs the network connection check service to finish
     requires = [ "network-connection.service" ];
     after = [ "network-connection.service" ];
   };
