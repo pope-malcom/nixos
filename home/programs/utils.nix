@@ -51,7 +51,6 @@
   };
 
   home.packages = with pkgs; [
-    
     # Archives
     zip
     unzip
@@ -62,5 +61,8 @@
 
     # System monitoring
     btop
+
+    # Utils
+    usbutils # lsusb
   ];
 }
