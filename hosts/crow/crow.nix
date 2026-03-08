@@ -1,6 +1,5 @@
 # Defines specific configurations for crow
-
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [ 
@@ -38,11 +37,21 @@
   };
   
   # Minimal greetd setup. Automatically logs into hyprland as pomal
+  programs.uwsm.enable = true;
   services.greetd = {
     enable = true;
-    settings = rec {
+    settings =
+    let 
+      hyprland-uwsm = pkgs.writeShellScriptBin "hyprland-uwsm" ''
+      #if uwsm check may-start 2; then
+        exec uwsm start default
+      #fi
+      '';
+    in
+    rec {
       initial_session = {
-        command = "${pkgs.hyprland}/bin/hyprland";
+          #command = "uwsm start default";
+          command = "${hyprland-uwsm}/bin/hyprland-uwsm" ;
         user = "pomal";
       };
       default_session = initial_session;
