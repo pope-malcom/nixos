@@ -12,5 +12,9 @@
       init.defaultBranch = "main";
       safe.directory = "/etc/nixos";
     };
+    package = pkgs.git.override { withLibsecret = true; };
+    settings = {
+      credential.helper = "libsecret";
+    };
   };
 }
