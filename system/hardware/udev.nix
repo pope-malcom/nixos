@@ -4,8 +4,8 @@
 
 {
   services.udev.extraRules = ''
-    # Exibel USB Ethernet adapter
-    SUBSYSTEM=="usb", ATTR{idVendor}="0b95", ATTR{idProduct}=="1790", MODE="0666"
+    # Enable R/W on all USB devices 
+    SUBSYSTEM=="usb", DRIVER=="usb", MODE="0666"
   '';
 
 }
