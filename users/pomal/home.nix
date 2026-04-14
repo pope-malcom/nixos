@@ -4,12 +4,10 @@
 
 {
   imports = [
-    ../../home/browsers/librewolf.nix
-    ../../home/programs
-    ../../home/shell
-    ../../home/desktop
+    # Default home programs
+    ../../home
 
-     # programs unique to this user
+    # Programs unique to this user
     ./programs
   ];
   
