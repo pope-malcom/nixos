@@ -71,6 +71,8 @@ in
           "SUPER, N, exec, ${config.programs.librewolf.package}/bin/librewolf"
           "SUPER, L, exec, ${config.programs.tofi.package}/bin/tofi-drun | xargs hyprctl dispatch exec"
           "SUPER, Q, killactive"
+          ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
+          ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
         ]
         ++ (
           # Workspace movement

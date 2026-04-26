@@ -5,6 +5,7 @@
   imports = [
     ./hyprland.nix
     ./waybar.nix
+    ./utils.nix
   ];
 
   home.desktop = {
