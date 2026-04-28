@@ -20,6 +20,9 @@
     config.init.defaultBranch = "main";
   };
 
+  # For sharing files nearby
+  programs.localsend.enable = true;
+
   environment.systemPackages = with pkgs; [
     # System packages to install
     pavucontrol
