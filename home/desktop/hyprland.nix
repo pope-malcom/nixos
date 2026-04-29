@@ -69,7 +69,7 @@ in
         bind = [
           "SUPER, T, exec, ${config.programs.alacritty.package}/bin/alacritty"
           "SUPER, N, exec, ${config.programs.librewolf.package}/bin/librewolf"
-          "SUPER, L, exec, ${config.programs.tofi.package}/bin/tofi-drun | xargs hyprctl dispatch exec"
+          "SUPER, L, exec, hyprctl dispatch exec \"$(${config.programs.tofi.package}/bin/tofi-drun)\""
           "SUPER, Q, killactive"
         ]
         ++ (
