@@ -24,6 +24,9 @@
             # This should work, but it doesn't
             "mail.smtpserver.smpt_${id}.authMethod" = 10;
             "mail.server.server_${id}.authMethod" = lib.mkDefault 10; # 10 is XOAuth
+
+            "mail.imap.auto_unsubscribe_from_noselect_folders" = false;
+            #"mail.server.server_${id}.using_subscription" = false;
           };
         };
         imap = {
