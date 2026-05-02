@@ -9,7 +9,7 @@
   # https://nix-community.github.io/nixvim/25.11/
   programs.nixvim = {
     enable = true;
-
+    defaultEditor = true;
   
     viAlias = true;
     vimAlias = true;
