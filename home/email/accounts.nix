@@ -26,7 +26,7 @@ in
         aliases = [ userName ];
         realName = "Sam";
         maildir.path = "Work";
-        passwordCommand = "${lib.getExe oauth} ${userName}";
+        passwordCommand = "${lib.getExe oauth} ${userName}"; # Handles XOAuth2 connections
         neomutt = {
           enable = true;
           mailboxType = "maildir";
@@ -48,7 +48,7 @@ in
             "Deleted Items"
             "Sent Items"
           ];
-          subFolders = "Verbatim";
+          subFolders = "Verbatim"; # Maintain folder structure of remote
           extraConfig.account.AuthMechs = "XOAUTH2";
         };
           
@@ -75,6 +75,6 @@ in
   programs.msmtp.enable = true;
   programs.mbsync = {
     enable = true;
-    package = pkgs.isync.override { withCyrusSaslXoauth2 = true; };
+    package = pkgs.isync.override { withCyrusSaslXoauth2 = true; }; # MSMTP does not support XOAUTH2 by default, this has to be added
   };
 }
