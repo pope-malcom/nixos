@@ -3,6 +3,7 @@
 
 {
   imports = [
-    ./accounts.nix
+    ./neomutt.nix
+    ./accounts/sam-uio.nix
   ];
 }
