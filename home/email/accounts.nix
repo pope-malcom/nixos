@@ -5,7 +5,7 @@ let
   oauth = import ./oauth2.nix { inherit pkgs lib; };
 in
 {
-  home.packages = [ oauth ];
+  home.packages = [ oauth pkgs.w3m ];
   accounts.email.maildirBasePath = "Mail";
   accounts.email.accounts = {
     pomal = {
@@ -31,6 +31,15 @@ in
           enable = true;
           mailboxType = "maildir";
           mailboxName = "Work";
+          extraConfig = ''
+            set use_threads = threads
+            set sort = reverse-last-date-received
+            set date_format = "%y/%m/%d %I:%M%p"
+            set mailcap_path = "~/.config/neomutt/mailcap"
+            
+            auto_view text/html
+            alternative_order text/plain text/enriched text/html
+          '';
         };
         msmtp = {
           enable = true;
@@ -43,6 +52,7 @@ in
           remove = "both";
           patterns = [ 
             "INBOX"
+            "Drafts"
             "Archive"
             "Trash"
             "Deleted Items"
@@ -76,5 +86,13 @@ in
   programs.mbsync = {
     enable = true;
     package = pkgs.isync.override { withCyrusSaslXoauth2 = true; }; # MSMTP does not support XOAUTH2 by default, this has to be added
+  };
+
+  # Setup mailcap file
+  home.file.".config/neomutt/mailcap" = {
+    text = ''
+      text/html; $BROWSER %s
+      text/html; ${pkgs.w3m}/bin/w3m -I %{charset} -T text/html -dump; copiousoutput;
+    '';
   };
 }
