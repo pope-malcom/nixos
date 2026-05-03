@@ -3,6 +3,10 @@
 { osConfig, config, pkgs, ... }:
 
 {
+  home.sessionVariables = {
+    BROWSER = "${pkgs.librewolf}/bin/librewolf";
+  };
+
   programs.librewolf = {
     enable = true;
 
