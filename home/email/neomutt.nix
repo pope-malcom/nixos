@@ -25,7 +25,10 @@ in
       # set sort = reverse-last-date-received
       set date_format = "%y/%m/%d %I:%M%p"
       set mailcap_path = "~/.config/neomutt/mailcap"
-            
+      
+      set collapse_all = yes
+      set uncollapse_new = yes
+
       auto_view text/html
       alternative_order text/plain text/enriched text/html
     '';
