@@ -1,11 +1,8 @@
 # Add email accounts for programs to use
 { pkgs, lib, ... }:
 
-let
-  oauth = import ./oauth2.nix { inherit pkgs lib; };
-in
 {
-  home.packages = [ oauth pkgs.w3m ];
+  home.packages = [ pkgs.w3m ];
   accounts.email.maildirBasePath = "Mail";
   accounts.email.accounts = {
     pomal = {
