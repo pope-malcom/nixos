@@ -18,6 +18,9 @@ in
         enable = true;
         mailboxType = "maildir";
         mailboxName = "Work";
+        extraConfig = ''
+          set record = '+Sent\ Items'
+        '';
       };
       msmtp = {
         enable = true;
