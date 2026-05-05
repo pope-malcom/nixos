@@ -44,4 +44,12 @@
       text/html; ${pkgs.w3m}/bin/w3m -I %{charset} -T text/html -dump; copiousoutput;
     '';
   };
+
+  services.pizauth = {
+    enable = true;
+    extraConfig = ''
+      token_event_cmd = "pizauth dump | base64 | secret-tool store --label='pizauth state' service pizauth";
+      startup_cmd = "secret-tool lookup service pizauth | base64 -d | pizauth restore";
+    '';
+  };
 }
